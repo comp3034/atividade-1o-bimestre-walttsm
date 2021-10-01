@@ -1,5 +1,6 @@
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 class MedidasScreen extends StatelessWidget {
   const MedidasScreen({Key? key}) : super(key: key);
@@ -45,6 +46,45 @@ class MedidasScreen extends StatelessWidget {
                     value: '70',
                     measure: 'kg',
                   ),
+                ],
+              ),
+            ),
+            Positioned(
+              right: 20,
+              top: 200,
+              child: Column(
+                children: [
+                  SizedBox(
+                    width: 90,
+                    height: 90,
+                    child: CustomPaint(
+                      child: Padding(
+                        padding: EdgeInsets.all(14.0),
+                        child: MeasureLabelWidget(
+                          label: 'Gordura',
+                          value: '170',
+                          measure: '',
+                        ),
+                      ),
+                      painter: GradientArcPainter(width: 6),
+                    ),
+                  ),
+                  SizedBox(height: 40),
+                  SizedBox(
+                    width: 90,
+                    height: 90,
+                    child: CustomPaint(
+                      child: Padding(
+                        padding: EdgeInsets.all(14.0),
+                        child: MeasureLabelWidget(
+                          label: 'IMC',
+                          value: '22',
+                          measure: '',
+                        ),
+                      ),
+                      painter: GradientArcPainter(width: 6),
+                    ),
+                  )
                 ],
               ),
             ),
@@ -179,7 +219,7 @@ class MeasureLabelWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text('$label'),
         RichText(
@@ -199,4 +239,42 @@ class MeasureLabelWidget extends StatelessWidget {
       ],
     );
   }
+}
+
+class GradientArcPainter extends CustomPainter {
+  const GradientArcPainter({
+    required this.width,
+  }) : super();
+
+  final double width;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final rect = new Rect.fromLTWH(0.0, 0.0, size.width, size.height);
+    final gradient = new SweepGradient(
+      startAngle: 3 * math.pi / 2,
+      endAngle: 7 * math.pi / 2,
+      tileMode: TileMode.repeated,
+      colors: [
+        Colors.green,
+        Colors.red,
+        Colors.blue,
+      ],
+    );
+
+    final paint = new Paint()
+      ..shader = gradient.createShader(rect)
+      ..strokeCap = StrokeCap.butt // StrokeCap.round is not recommended.
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = width;
+    final center = new Offset(size.width / 2, size.height / 2);
+    final radius = math.min(size.width / 2, size.height / 2) - (width / 2);
+    final startAngle = math.pi;
+    final sweepAngle = math.pi * 1.5;
+    canvas.drawArc(new Rect.fromCircle(center: center, radius: radius),
+        startAngle, sweepAngle, false, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }
