@@ -49,7 +49,7 @@ class MedidasScreen extends StatelessWidget {
               ),
             ),
             NestedMeasureWidget(
-              top: 188,
+              top: 130,
               left: 0,
               width: width * .5,
               label: 'Pescoço',
@@ -57,10 +57,50 @@ class MedidasScreen extends StatelessWidget {
               measure: ' cm',
             ),
             NestedMeasureWidget(
-              top: 188 + 48,
+              top: 130 + 40,
               left: 0,
-              width: width * .6,
+              width: width * .7,
               label: 'Peito',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 130 + 80,
+              left: 40,
+              width: width * .4,
+              label: 'Bíceps',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 130 + 120,
+              left: 0,
+              width: width * .7,
+              label: 'Cintura',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 130 + 160,
+              left: 0,
+              width: width * .5,
+              label: 'Quadril',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 130 + 240,
+              left: 0,
+              width: width * .7,
+              label: 'Coxa',
+              value: '95',
+              measure: ' cm',
+            ),
+            NestedMeasureWidget(
+              top: 130 + 340,
+              left: 0,
+              width: width * .5,
+              label: 'Panturrilha',
               value: '95',
               measure: ' cm',
             ),
@@ -145,9 +185,7 @@ class MeasureLabelWidget extends StatelessWidget {
         RichText(
           text: TextSpan(
             text: '$value',
-            style: TextStyle(
-              fontSize: 36,
-            ),
+            style: TextStyle(fontSize: 36, color: Colors.black),
             children: [
               TextSpan(
                 text: ' $measure',
