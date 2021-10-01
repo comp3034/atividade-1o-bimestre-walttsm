@@ -1,1 +1,1 @@
-export 'ui/screens/register_screen.dart';
+export 'ui/ui.dart';
