@@ -69,6 +69,8 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
   RegExp _lower = RegExp(r'[a-z]');
   RegExp _numeric = RegExp(r'[0-9]');
   bool isPasswordObscured = true;
+  bool isConfirmObscured = true;
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -142,6 +144,9 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
                 }
                 return null;
               },
+              onChanged: (value) {
+                _password = value;
+              },
             ),
           ),
           Padding(
@@ -150,14 +155,18 @@ class _RegisterFormWidgetState extends State<RegisterFormWidget> {
               hintText: 'Confirmar Senha',
               prefixIcon: Icons.lock_outline,
               sufixIcon:
-                  isPasswordObscured ? Icons.visibility_off : Icons.visibility,
-              obscureText: isPasswordObscured,
+                  isConfirmObscured ? Icons.visibility_off : Icons.visibility,
+              obscureText: isConfirmObscured,
               suffixIconOnPressed: () {
                 setState(() {
-                  isPasswordObscured = !isPasswordObscured;
+                  isConfirmObscured = !isConfirmObscured;
                 });
               },
-              validator: (value) {},
+              validator: (value) {
+                if (value != _password) {
+                  return 'As senhas não coincidem, por favor digite novamente';
+                }
+              },
             ),
           ),
           Padding(
